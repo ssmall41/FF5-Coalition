@@ -1,0 +1,23 @@
+Job,Crystal,Style,Strength,Agility,Vitality,Magic,Knives,Swords,Knight Swords,Boomerangs,Rods,Staves,Axes,Whips,Bells,Short Swords,Bows,Harps,Spears,Katanas,Ribbons,Shields
+Bard,Fire,Mage,-8,8,-9,11,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+Beastmaster,Fire,Clothes,13,1,8,-3,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+Berserker,Water,Heavy,21,-9,25,-23,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1
+Black Mage,Wind,Mage,-9,0,-2,31,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+Blue Mage,Wind,Mage,-8,1,3,23,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1
+Chemist,Earth,Clothes,2,3,6,-4,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+Dancer,Earth,Clothes,5,5,-10,-5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+Dragoon,Earth,Heavy,18,5,15,-12,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1
+Geomancer,Fire,Mage,4,2,4,24,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+Knight,Wind,Heavy,23,1,20,-14,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1
+Monk,Wind,Heavy,26,1,26,-23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mystic Knight,Water,Clothes,14,14,14,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+Ninja,Fire,Clothes,15,14,3,-10,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0
+Ranger,Fire,Clothes,16,12,1,-5,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+Red Mage,Water,Clothes,8,4,6,8,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+Samurai,Earth,Heavy,19,2,19,-12,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1
+Summoner,Water,Mage,-10,-1,-1,33,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+Thief,Wind,Clothes,1,16,2,-6,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+Time Mage,Water,Mage,-5,2,-3,24,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+White Mage,Wind,Mage,-7,1,0,25,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+Mime,Misc,Misc,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1
+Freelancer,Misc,Misc,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
