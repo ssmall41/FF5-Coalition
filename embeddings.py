@@ -3,7 +3,7 @@ import numpy as np
 
 
 def calculate_party_embeddings(valid_parties: list, df_jobs: pd.DataFrame, 
-                               stat_cols: list, equip_factor: float=1.0) -> list:
+                               stat_cols: list, equip_factor: float = 1.0) -> list:
     """ Go through each valid party and calculate the embeddings for each party. The return value
     is an embedding list with one row per valid party of the form
     [("job1,job2,job3,job4", [v1,v2,v3,...]), ()...].
@@ -29,9 +29,7 @@ def calculate_party_embeddings(valid_parties: list, df_jobs: pd.DataFrame,
         counter += 1
 
         # Calculate the style and equipment embeddings
-        #chosen_party = party_str.split(",")
-        style_equip_embedding = calculate_style_equip_embedding(
-            chosen_party, df_jobs, stat_cols, equip_factor)
+        style_equip_embedding = calculate_style_equip_embedding(chosen_party, df_jobs, equip_factor)
 
         # Calculate the stats embeddings
         stats_embedding = calculate_stats_embedding(chosen_party, df_jobs, stat_cols, max_values)
@@ -44,7 +42,7 @@ def calculate_party_embeddings(valid_parties: list, df_jobs: pd.DataFrame,
     return valid_parties_embeddings
 
 
-def calculate_style_equip_embedding(chosen_party: list, df_jobs: pd.DataFrame, stat_cols: list, equip_factor: float=1.0) -> np.ndarray:
+def calculate_style_equip_embedding(chosen_party: list, df_jobs: pd.DataFrame, equip_factor: float = 1.0) -> np.ndarray:
     """ Calculate embeddings based on the style and equipment for the chosen party.
     For style, this computes the number of jobs of each style (heavy, clothes, mage, misc) in the
     party and multiplies by 0.25, keeping values between 0.0 and 1.0.
@@ -64,7 +62,6 @@ def calculate_style_equip_embedding(chosen_party: list, df_jobs: pd.DataFrame, s
     
     :param chosen_party: list of jobs in the party, e.g. ["Knight", "Red Mage", "Ninja", "Dragoon"]
     :param df_jobs: the DataFrame with data on each job
-    :param stats_cols: the column names in df_jobs of the stats
     :param equip_factor: the scaling factor for the equipment embeddings
     :return: the embeddings for style and equipment for the chosen party
     """
@@ -112,28 +109,29 @@ def calculate_style_equip_embedding(chosen_party: list, df_jobs: pd.DataFrame, s
     return np.concatenate(available_embeddings)
 
 
-def calculate_stats_embedding(chosen_party: list, df_jobs: pd.DataFrame, stats_cols: list, max_values: np.ndarray or None=None) -> np.ndarray:
+def calculate_stats_embedding(chosen_party: list, df_jobs: pd.DataFrame, stat_cols: list,
+                              max_values: np.ndarray or None = None) -> np.ndarray:
     """ Calculate the embeddings for the stats. We'll just sum them up over the jobs in the party
     and dividing them by max_values.
     :param chosen_party: list of jobs in the party, e.g. ["Knight", "Red Mage", "Ninja", "Dragoon"]
     :param df_jobs: the DataFrame with data on each job
-    :param stats_cols: the column names in df_jobs of the stats
+    :param stat_cols: the column names in df_jobs of the stats
     :param max_values: values used to scale the stats embeddings. If None, then the maximum
     values found in df_jobs is used.
     :return: the embedding for the stats
     """
 
-    stats_embedding = np.zeros((len(stats_cols), ), dtype=float)
+    stats_embedding = np.zeros((len(stat_cols), ), dtype=float)
 
     if max_values is None:
         # For the stats embedding, calculate the max values of each stat
         # Divide by 4 to keep the values between -1 and 1
         max_values = abs(df_jobs[stat_cols]).max() * 4.0
 
-    assert len(stats_cols) == max_values.shape[0]
+    assert len(stat_cols) == max_values.shape[0]
     
     for job in chosen_party:
-        stats_embedding += df_jobs.loc[job][stats_cols].to_numpy().astype(float)
+        stats_embedding += df_jobs.loc[job][stat_cols].to_numpy().astype(float)
 
     return stats_embedding / max_values
 
@@ -144,7 +142,7 @@ def get_crystal_idx(job: str, df_jobs: pd.DataFrame, crystal_order: list, crysta
     For example, in the actual game, Knight -> Wind Crystal -> 0, Berserker -> Water Crystal -> 1.
     :param job: the job as a string: "Knight", "White Mage", "Freelancer", etc.
     :param df_jobs: the DataFrame of jobs data
-    :param crystal_order: the list of crystals defining the their order. Probably
+    :param crystal_order: the list of crystals defining their order. Probably
     ["Wind", "Water", "Fire", "Earth"]
     :param crystal_col: the column in df_jobs with crystal for each job
     :return: the index in crystal_order for the crystal of the given job
@@ -157,4 +155,3 @@ def get_crystal_idx(job: str, df_jobs: pd.DataFrame, crystal_order: list, crysta
     else:
         crystal_idx = crystal_order.index(df_jobs.loc[job][crystal_col])
     return crystal_idx
-    
