@@ -1,7 +1,30 @@
 from copy import copy
 import numpy as np
 from numpy.linalg import norm
-from random import randint
+from numpy.random import randint
+
+
+def select_parties_randomly(valid_parties: list, num_parties: int = 10, eps: float = 1.0) -> list:
+    """ Given a selection of parties, select num_parties which are intended to be played. This selects
+    the parties randomly. The argument valid_parties should be of the party embedding format:
+    [("job1,job2,job3,job4", embedding), (), ...]
+    however, the embedding field is not use. Passing the embedding here is sometimes useful for later analyses.
+
+    :param valid_parties: a list of party embeddings. Must be of the form
+    [("job1,job2,job3,job4", embedding), (), ...]
+    :param num_parties: the number of parties to select
+    :param eps: unused parameter
+    :return: the list of selected parties
+    """
+
+    if num_parties > len(valid_parties):
+        num_parties = len(valid_parties)
+        print(f"Notice: num_parties was larger than the number of valid parties. Setting num_parties to {num_parties}.")
+
+    chosen_party_indices = randint(0, len(valid_parties), size=(num_parties, ))
+    selected_parties = [valid_parties[i] for i in chosen_party_indices]
+
+    return selected_parties
 
 
 def select_parties_by_embeddings(valid_parties: list, num_parties: int = 10, eps: float = 1.0) -> list:
@@ -31,7 +54,7 @@ def select_parties_by_embeddings(valid_parties: list, num_parties: int = 10, eps
     for idx_party in range(0, num_parties):
 
         # Select a party
-        chosen_party_idx = randint(0, len(available_parties)-1)
+        chosen_party_idx = randint(0, len(available_parties))
         selected_parties.append(available_parties[chosen_party_idx])
         available_parties[chosen_party_idx] = available_parties[-1]
         available_parties.pop()
