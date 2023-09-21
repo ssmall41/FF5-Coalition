@@ -28,16 +28,19 @@ def calculate_party_embeddings(valid_parties: list, df_jobs: pd.DataFrame,
             print(f"On {counter} / {len(valid_parties)}")
         counter += 1
 
+        # Calculate the stats embeddings
+        # stats_embedding = calculate_stats_embedding(chosen_party, df_jobs, stat_cols, max_values)
+
         # Calculate the style and equipment embeddings
         style_equip_embedding = calculate_style_equip_embedding(chosen_party, df_jobs, equip_factor)
 
-        # Calculate the stats embeddings
-        stats_embedding = calculate_stats_embedding(chosen_party, df_jobs, stat_cols, max_values)
+        # Calculate the jobs embeddings
+        jobs_embedding = calculate_jobs_embedding(chosen_party, df_jobs)
         
         # Put the embeddings together
         valid_parties_embeddings.append(
             (",".join(chosen_party), 
-             np.concatenate([stats_embedding, style_equip_embedding])))
+             np.concatenate([style_equip_embedding, jobs_embedding])))
 
     return valid_parties_embeddings
 
@@ -134,6 +137,22 @@ def calculate_stats_embedding(chosen_party: list, df_jobs: pd.DataFrame, stat_co
         stats_embedding += df_jobs.loc[job][stat_cols].to_numpy().astype(float)
 
     return stats_embedding / max_values
+
+
+def calculate_jobs_embedding(chosen_party, df_jobs):
+    """ Checks the jobs in the chosen party and turns this info into an embedding. The embedding
+    contains one 0/1 value for each job (order is the same as df_jobs). Note that duplicate jobs
+    do not increase the value beyond 1, otherwise duplicate jobs would be heavily favored.
+
+    :param chosen_party: list of jobs in the party, e.g. ["Knight", "Red Mage", "Ninja", "Dragoon"]
+    :param df_jobs: the DataFrame with data on each job
+    :return: the embedding for the stats
+    """
+
+    jobs_embedding = np.zeros((len(df_jobs), ), dtype=float)
+    for job in chosen_party:
+        jobs_embedding[np.where((df_jobs.index == job))[0][0]] = 1.0
+    return jobs_embedding
 
 
 def get_crystal_idx(job: str, df_jobs: pd.DataFrame, crystal_order: list, crystal_col: str) -> int:
