@@ -4,7 +4,8 @@ from numpy.linalg import norm
 from numpy.random import randint
 
 
-def select_parties_randomly(valid_parties: list, num_parties: int = 10, eps: float = 1.0) -> list:
+def select_parties_randomly(valid_parties: list, num_parties: int = 10, eps: float = 1.0,
+                            verbose: bool = False) -> list:
     """ Given a selection of parties, select num_parties which are intended to be played. This selects
     the parties randomly. The argument valid_parties should be of the party embedding format:
     [("job1,job2,job3,job4", embedding), (), ...]
@@ -14,12 +15,15 @@ def select_parties_randomly(valid_parties: list, num_parties: int = 10, eps: flo
     [("job1,job2,job3,job4", embedding), (), ...]
     :param num_parties: the number of parties to select
     :param eps: unused parameter
+    :param verbose: print logging info?
     :return: the list of selected parties
     """
 
     if num_parties > len(valid_parties):
         num_parties = len(valid_parties)
-        print(f"Notice: num_parties was larger than the number of valid parties. Setting num_parties to {num_parties}.")
+        if verbose:
+            print(f"Notice: num_parties was larger than the number of valid parties. "
+                  f"Setting num_parties to {num_parties}.")
 
     chosen_party_indices = randint(0, len(valid_parties), size=(num_parties, ))
     selected_parties = [valid_parties[i] for i in chosen_party_indices]
@@ -27,7 +31,8 @@ def select_parties_randomly(valid_parties: list, num_parties: int = 10, eps: flo
     return selected_parties
 
 
-def select_parties_by_embeddings(valid_parties: list, num_parties: int = 10, eps: float = 1.0) -> list:
+def select_parties_by_embeddings(valid_parties: list, num_parties: int = 10, eps: float = 1.0,
+                                 verbose: bool = False) -> list:
     """ Given a selection of party embeddings, select num_parties which are intended to be played. This
     uses the embeddings in the selection process. The first party is selected at random. Further parties
     are selected so that they more than eps away (in 2-norm) from any other selected party.
@@ -40,6 +45,7 @@ def select_parties_by_embeddings(valid_parties: list, num_parties: int = 10, eps
     [("job1,job2,job3,job4", embedding), (), ...]
     :param num_parties: the number of parties to select
     :param eps: the distance all selected parties must be from each other, to start
+    :param verbose: print logging info?
     :return: the list of selected parties
     """
 
@@ -49,7 +55,9 @@ def select_parties_by_embeddings(valid_parties: list, num_parties: int = 10, eps
 
     if num_parties > len(valid_parties):
         num_parties = len(valid_parties)
-        print(f"Notice: num_parties was larger than the number of valid parties. Setting num_parties to {num_parties}.")
+        if verbose:
+            print(f"Notice: num_parties was larger than the number of valid parties. "
+                  f"Setting num_parties to {num_parties}.")
     
     for idx_party in range(0, num_parties):
 
@@ -70,9 +78,10 @@ def select_parties_by_embeddings(valid_parties: list, num_parties: int = 10, eps
                 eps *= 0.8
                 available_parties = unavailable_parties  # Make all remaining parties available again
                 unavailable_parties = []
-    
-                print("Notice: Available parties are too close to selected parties.")
-                print(f"Trying eps = {eps} for party {idx_party+1}")
+
+                if verbose:
+                    print("Notice: Available parties are too close to selected parties.")
+                    print(f"Trying eps = {eps} for party {idx_party+1}")
                 
                 # Make parties unavailable again if they are too close to an already selected party
                 for selected_party in selected_parties:
