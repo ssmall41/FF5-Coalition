@@ -162,3 +162,4 @@ cython_debug/
 # Project related stuff
 data/
 holder/
+output/
