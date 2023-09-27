@@ -29,7 +29,8 @@ My goal here is to collect feedback on the quality of parties produced and under
 from each other. To be clear: I have no intention of making the website nicer by unlocking jobs or storing assignment histories. 
 That would be reproducing the Four Job Fiesta site, and I have no interest in doing so. 
 
-To provide feedback: if you've got a GitHub account, you can leave your feedback in an [issue](https://github.com/ssmall41/FF5FJF-Selector/issues) on the project. 
+To provide feedback: if you've got a GitHub account, you can leave your feedback in an [issue](https://github.com/ssmall41/FF5FJF-Selector/issues) on the project. I can also be reached on Discord
+as yet41.
 
 ## How Does It Work?
 Once a play style is selected, the first party is decided completely randomly. Note that there is no special weighting to the jobs in the 
