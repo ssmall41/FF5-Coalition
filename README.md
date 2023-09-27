@@ -32,6 +32,10 @@ That would be reproducing the Four Job Fiesta site, and I have no interest in do
 To provide feedback: if you've got a GitHub account, you can leave your feedback in an [issue](https://github.com/ssmall41/FF5FJF-Selector/issues) on the project. I can also be reached on Discord
 as yet41.
 
+## How to Use the Code
+The codebase for Coalition is written in Python. Clone the Git repository, and then run `pip install -r requirements.txt` in the folder for the project.
+The Jupyter Notebook file assignment.ipynb is how I generate parties. Of course, you're welcome to go through the `.py` files to see details.
+
 ## How Does It Work?
 Once a play style is selected, the first party is decided completely randomly. Note that there is no special weighting to the jobs in the 
 party; they’re all equally likely to be chosen, but in line with the rules of the play style. (I mention this because I believe the official event 
