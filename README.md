@@ -21,7 +21,7 @@ The goal of Coalition is to produce a set of parties that are “different” fr
 Fiesta runs while experiencing different challenges from each. 
 
 ## How to Use Coalition
-A proof of concept is [available online](https://sites.google.com/view/ff5-fjf-selector/home), and feedback is appreciated. The Coalition website will allow 
+A proof of concept is [available online](https://sites.google.com/view/ff5-coalition/home), and feedback is appreciated. The Coalition website will allow 
 players to select a play style (for now, Regular, Meteor, or Meteor with Duplicates) and receive a collection of five unique parties. 
 There’s no unlocking jobs like in the Four Job Fiesta event. 
 
