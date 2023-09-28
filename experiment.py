@@ -22,7 +22,7 @@ def run_trials(valid_parties_embeddings: list, num_parties: int, num_trials: int
     """
     trials = []
     for t in range(num_trials):
-        if verbose:
+        if verbose and t % 10 == 0:
             print(f"Trial {t} #######")
         selected_parties = selector(valid_parties_embeddings, num_parties, eps)
         comparison_matrix = generate_comparison_matrix(selected_parties)

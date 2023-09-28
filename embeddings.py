@@ -2,15 +2,15 @@ import pandas as pd
 import numpy as np
 
 
-def calculate_party_embeddings(valid_parties: list, df_jobs: pd.DataFrame, 
-                               stat_cols: list, double_weight_jobs: list = None, equip_factor: float = 1.0) -> list:
+def calculate_party_embeddings(valid_parties: list, df_jobs: pd.DataFrame,
+                               stat_cols: list, special_weight_jobs: list = None, equip_factor: float = 1.0) -> list:
     """ Go through each valid party and calculate the embeddings for each party. The return value
     is an embedding list with one row per valid party of the form
     [("job1,job2,job3,job4", [v1,v2,v3,...]), ()...].
     :param valid_parties: a list of parties that are possible
     :param df_jobs: the DataFrame of job's data
     :param stat_cols: a list of the column names in df_jobs for stats
-    :param double_weight_jobs: double the weight of these jobs
+    :param special_weight_jobs: double the weight of these jobs
     :param equip_factor: the weight to give the embeddings for equipment
     :return: the embedding list
     """
@@ -20,7 +20,7 @@ def calculate_party_embeddings(valid_parties: list, df_jobs: pd.DataFrame,
 
     # For the stats embedding, calculate the max values of each stat
     # Divide by 4 to keep the values between -1 and 1
-    max_values = abs(df_jobs[stat_cols]).max() * 4.0
+    #max_values = abs(df_jobs[stat_cols]).max() * 4.0
     
     for chosen_party in valid_parties:
 
@@ -30,13 +30,13 @@ def calculate_party_embeddings(valid_parties: list, df_jobs: pd.DataFrame,
         counter += 1
 
         # Calculate the stats embeddings
-        # stats_embedding = calculate_stats_embedding(chosen_party, df_jobs, stat_cols, max_values)
+        #stats_embedding = calculate_stats_embedding(chosen_party, df_jobs, stat_cols, max_values)
 
         # Calculate the style and equipment embeddings
         style_equip_embedding = calculate_style_equip_embedding(chosen_party, df_jobs, equip_factor)
 
         # Calculate the jobs embeddings
-        jobs_embedding = calculate_jobs_embedding(chosen_party, df_jobs, double_weight_jobs)
+        jobs_embedding = calculate_jobs_embedding(chosen_party, df_jobs, special_weight_jobs)
         
         # Put the embeddings together
         valid_parties_embeddings.append(
@@ -140,7 +140,7 @@ def calculate_stats_embedding(chosen_party: list, df_jobs: pd.DataFrame, stat_co
     return stats_embedding / max_values
 
 
-def calculate_jobs_embedding(chosen_party: list, df_jobs: pd.DataFrame, double_weight_jobs: list = None):
+def calculate_jobs_embedding(chosen_party: list, df_jobs: pd.DataFrame, special_weight_jobs: list = None):
     """ Checks the jobs in the chosen party and turns this info into an embedding. The embedding
     contains one 0/1 value for each job (order is the same as df_jobs). Note that duplicate jobs
     do not increase the value beyond 1, otherwise duplicate jobs would be heavily favored. Jobs
@@ -149,18 +149,17 @@ def calculate_jobs_embedding(chosen_party: list, df_jobs: pd.DataFrame, double_w
 
     :param chosen_party: list of jobs in the party, e.g. ["Knight", "Red Mage", "Ninja", "Dragoon"]
     :param df_jobs: the DataFrame with data on each job
-    :param double_weight_jobs: jobs to weight double
+    :param special_weight_jobs: jobs to weight double
     :return: the embedding for the stats
     """
 
     jobs_embedding = np.zeros((len(df_jobs), ), dtype=float)
     for job in chosen_party:
-        jobs_embedding[np.where((df_jobs.index == job))[0][0]] = 1.0
-
-    # Double the weight of some jobs
-    if double_weight_jobs:
-        for job in double_weight_jobs:
-            jobs_embedding[np.where((df_jobs.index == job))[0][0]] *= 0.1
+        idx = np.where((df_jobs.index == job))[0][0]
+        if job in special_weight_jobs:
+            jobs_embedding[idx] = 0.1
+        else:
+            jobs_embedding[idx] = 1.0
 
     return jobs_embedding
 

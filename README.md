@@ -47,8 +47,8 @@ the first party. Those “close” parties are removed from consideration. Then 
 The selection process continues in a similar way for further parties. Coalition looks at already chosen parties, removes all “close” 
 parties from consideration, and then selects a new party randomly. 
 
-It’s totally possible that after a few parties are chosen, all remaining parties are too “close”. When this happens, Coalition relaxes its 
-idea of “closeness” a bit to allow for new parties to be chosen. Theoretically, all possible parties can eventually be chosen using this approach, 
+It’s totally possible that after a few parties are chosen, all remaining parties are too “close” to each other. When this happens, Coalition relaxes its 
+idea of closeness a bit to allow for new parties to be chosen. Theoretically, all possible parties can eventually be chosen using this approach, 
 but I doubt anyone has the patience for playing all of them. The website has a built-in limitation of five parties. In the code, this limit can be changed to anything.
 
 ## What does “close” mean?
@@ -62,11 +62,11 @@ embedding. With the embeddings in place, it’s possible to compare two parties 
 So how does the code calculate the embeddings? That takes into consideration the jobs in the party, and the order in which they are assigned. 
 Right now, the code takes into account the following: 
 
-* jobs in the party and how many (important for runs allowing Duplicates),
+* jobs in the party and how many (important for runs allowing Duplicates), with special consideration to "broken" jobs (Black Mage, Summoner, and Chemist),
 * the number of each style of job available in the party after each crystal (style means Heavy, Clothes, Mage, or Misc, with Misc being Mime and Freelancer), and 
 * the weapon types that the party can use after each crystal whether an available job can use a shield at each crystal.
 
-* For Meteor runs, it’s possible that no jobs are available after a crystal and the party must consist of only Freelancers. Coalition takes this into account. 
+For Meteor runs, it’s possible that no jobs are available after a crystal and the party must consist of only Freelancers. Coalition takes this into account. 
 
 ## FAQs
 
@@ -87,9 +87,14 @@ with !White and !Black. But really, I don’t expect to get much value by includ
 
 ### Are there other things that could be considered in the “closeness” definition?
 Yep. This topic is a bit open-ended. Some stuff I can think of off the top of my head:
-Inflicting statuses: what statuses can a party inflict on enemies? For example, the Atmos battle is made simple when the party can put 
+
+* Inflicting statuses: what statuses can a party inflict on enemies? For example, the Atmos battle is made simple when the party can put 
 it to sleep. This is limited to parties with access to Swords and !Black.
-Broken jobs: 
+* Broken jobs: this is a pretty open topic. For the current version of Coalition, it's less likely (but not impossible) that you'll see 
+a Black Mage, Summoner, and Chemist appearing in multiple parties. It's an arbitrary line to draw here: are those really "broken" jobs?
+What about Blue Mage?
+
+There are probably a million other things to consider. Ideas are always appreciated.
 
 ### The third party I generated has the same job from the second party. What gives?
 Coalition is not the same as gauntlet runs, where every party has a unique set of jobs. The same job could be selected for 
