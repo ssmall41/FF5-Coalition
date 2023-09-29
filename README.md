@@ -68,7 +68,7 @@ Right now, the code takes into account the following:
 
 For Meteor runs, it’s possible that no jobs are available after a crystal and the party must consist of only Freelancers. Coalition takes this into account. 
 
-## FAQs
+## FAQs (or rather, questions I think will be asked)
 
 ### Are you affiliated with the official Four Job Fiesta?
 Nope. I’ve participated the last several years, but I have nothing to do with administration of the event at all. I’m just playing Final Fantasy. 
@@ -96,10 +96,10 @@ What about Blue Mage?
 
 There are probably a million other things to consider. Ideas are always appreciated.
 
-### The third party I generated has the same job from the second party. What gives?
-Coalition is not the same as gauntlet runs, where every party has a unique set of jobs. The same job could be selected for 
+### One party has a job from another party! What gives?
+Coalition is not the same as gauntlet runs, where every job shows up once (maybe twice). The same job could be selected for 
 multiple parties, but the parties themselves will play differently. That said, one way to make parties play differently is to use different jobs, 
-so 5 parties will see most of the jobs appearing. 
+so 5 parties will see a lot of jobs appearing only once. 
 
 
 
