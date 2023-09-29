@@ -1,7 +1,7 @@
 # Coalition
 
 ## Introduction 
-Coalition is a project for generating multiple parties for challenge runs of FF5. All parties are intended to be Four Job Fiesta type of runs. 
+Coalition is a project for generating multiple parties for challenge runs of [Final Fantasy 5 (FF5)](https://en.wikipedia.org/wiki/Final_Fantasy_V). All parties are intended to be Four Job Fiesta type of runs. 
 
 [Four Job Fiesta](https://www.rpgsite.net/feature/11964-final-fantasy-v-four-job-fiesta-guide-how-to-tackle-this-unique-challenge) is a “challenge mode” for FF5. 
 Instead of playing the game as normal, participants are assigned 4 jobs randomly (with some rules) that their characters 1) are allowed to use, and 2) must use. 
@@ -11,7 +11,7 @@ This play style is popularized by the yearly [FF5 Four Job Fiesta charity event]
 charity event are not restricted to a single run. In fact, many participants make several runs. Although some settings can be tweaked, 
 jobs are always assigned randomly, meaning each run is extremely likely to offer a unique combination of jobs.
 
-However, not all combinations of jobs are completely unique in terms of play style. For example, Knight / Berserker / Ranger / Dragoon will have a 
+However, not all combinations of jobs are completely different in terms of play style. For example, Knight / Berserker / Ranger / Dragoon will have a 
 similar play style to Knight / Mystic Knight / Ninja / Samurai; both parties are oriented towards physical attacks. Some jobs are known to be “broken”, 
 which means any party that includes them will be played similarly. For example, a winnable strategy for a party with a Summoner is for each character to 
 learn the !Summon ability and rely on that for almost every situation, with the other three jobs having much less importance. Not much skill is required of 
@@ -27,17 +27,17 @@ There’s no unlocking jobs like in the Four Job Fiesta event.
 
 My goal here is to collect feedback on the quality of parties produced and understand whether others think they are really “different” 
 from each other. To be clear: I have no intention of making the website nicer by unlocking jobs or storing assignment histories. 
-That would be reproducing the Four Job Fiesta site, and I have no interest in doing so. 
+I have no interest in reproducing the Four Job Fiesta event site.
 
-To provide feedback: if you've got a GitHub account, you can leave your feedback in an [issue](https://github.com/ssmall41/FF5FJF-Selector/issues) on the project. I can also be reached on Discord
+To provide feedback: you can leave your feedback in a GitHub [issue](https://github.com/ssmall41/FF5FJF-Selector/issues) on the project. I can also be reached on Discord
 as yet41.
 
 ## How to Use the Code
-The codebase for Coalition is written in Python. Clone the Git repository, and then run `pip install -r requirements.txt` in the folder for the project.
-The Jupyter Notebook file assignment.ipynb is how I generate parties. Of course, you're welcome to go through the `.py` files to see details.
+The codebase for Coalition is written in Python. Clone the Git repository, and then run `pip install -r requirements.txt` in the project folder.
+The Jupyter Notebook file `assignment.ipynb` is how I generate parties. Of course, you're welcome to go through the `.py` files to see details.
 
 ## How Does It Work?
-Once a play style is selected, the first party is decided completely randomly. Note that there is no special weighting to the jobs in the 
+Once a play style is selected, the first party is decided completely randomly. Note that there is no special weighting to the jobs in the first 
 party; they’re all equally likely to be chosen, but in line with the rules of the play style. (I mention this because I believe the official event 
 has, in the past, not used completely equal weighting for Meteor runs). 
 
@@ -53,7 +53,8 @@ but I doubt anyone has the patience for playing all of them. The website has a b
 
 ## What does “close” mean?
 Yeah, that’s pretty much the heart and soul of all this. There isn’t a 100% perfect way to define closeness between two parties, and any 
-measure used is up for debate. I’ll give the high-level idea here, but if you’re a fiend for details, check <here in the code> to see the exact definitions.
+measure used is up for debate. I’ll give the high-level idea here, but if you’re a fiend for details, check <here in the code> to see the exact definitions
+in `embeddings.py`.
 
 Every party is represented in the code by a collection of numbers called an embedding. (If you want to get into it, mathematically, an 
 embedding is a vector in R^d with d in the current website being x.) The code here generates every possible party and calculates an appropriate 
@@ -63,43 +64,51 @@ So how does the code calculate the embeddings? That takes into consideration the
 Right now, the code takes into account the following: 
 
 * jobs in the party and how many (important for runs allowing Duplicates), with special consideration to "broken" jobs (Black Mage, Summoner, and Chemist),
-* the number of each style of job available in the party after each crystal (style means Heavy, Clothes, Mage, or Misc, with Misc being Mime and Freelancer), and 
-* the weapon types that the party can use after each crystal whether an available job can use a shield at each crystal.
+* the number of each style of job available in the party after each crystal (style means Heavy, Clothes, Mage, or Misc, with Misc being Mime and Freelancer), 
+* the weapon types that the party can use after each crystal, and
+* whether an available jobs can use a shield at each crystal.
 
 For Meteor runs, it’s possible that no jobs are available after a crystal and the party must consist of only Freelancers. Coalition takes this into account. 
 
 ## FAQs (or rather, questions I think will be asked)
 
-### Are you affiliated with the official Four Job Fiesta?
-Nope. I’ve participated the last several years, but I have nothing to do with administration of the event at all. I’m just playing Final Fantasy. 
+### Are you affiliated with the official Four Job Fiesta Event?
+Nope. I’ve participated the last several years, but I have nothing to do with administration of the event at all. I’m just playing old school Final Fantasy. 
 
 ### Why did you make this?
-I saw in the official FJF Discord channel several discussions about “gauntlet runs”, where participants would try to play every job at least 
-once. I also noticed participants making multiple (in some cases, more than 10) runs per event. When multiple runs happen, it becomes likely 
-that some will be very similar in style, and that’s not interesting. Personally when I play, I’m always praying to the RNG gods to get something 
-different so that I’m not just playing the same game over and over. It keeps things interesting. 
+I saw in the FJF Event Discord channel several discussions about “gauntlet runs”, where participants would try to play every job at least 
+once. I also noticed participants making multiple (in some cases, more than 10) runs per event. This made me wonder if it would be possible to force party
+selection in a way to keep things interesting. Personally when I play multiple runs, I’m praying to 
+the RNG gods to get significantly different parties so that I’m not just doing the same thing over and over. It keeps things interesting. 
 
 ### Why don’t you include job skills when defining “closeness”?
 The challenge with including skills is that they are almost entirely determined by the job that provides them, so just checking which 
-jobs are in the party covers this. For example, TwoHanded comes from the Knight job; no other job teaches it. If a party has a Knight, 
-TwoHanded is on the table.  There are a few small exceptions, like !Flee and !Smoke are functionally the same, and !Red overlaps a bit 
+jobs are in the party covers this. For example, TwoHanded comes from the Knight job; no other job teaches it. Checking if a party
+has a Knight is enough to include TwoHanded in the mix. There are a few small exceptions, like !Flee and !Smoke are functionally the same, and !Red overlaps a bit 
 with !White and !Black. But really, I don’t expect to get much value by including skills. 
 
 ### Are there other things that could be considered in the “closeness” definition?
 Yep. This topic is a bit open-ended. Some stuff I can think of off the top of my head:
 
-* Inflicting statuses: what statuses can a party inflict on enemies? For example, the Atmos battle is made simple when the party can put 
-it to sleep. This is limited to parties with access to Swords and !Black.
+* Inflicting statuses: what statuses can a party inflict on enemies? For example, the Atmos battle is simpler when the party can put 
+it to sleep. This is limited to parties with access to Swords and !Black, so including which parties have access to sleep could help.
+It's similar for other statuses (mute, darkness, instant death, etc.)
 * Broken jobs: this is a pretty open topic. For the current version of Coalition, it's less likely (but not impossible) that you'll see 
 a Black Mage, Summoner, and Chemist appearing in multiple parties. It's an arbitrary line to draw here: are those really "broken" jobs?
-What about Blue Mage?
+Are there others?
 
 There are probably a million other things to consider. Ideas are always appreciated.
 
-### One party has a job from another party! What gives?
-Coalition is not the same as gauntlet runs, where every job shows up once (maybe twice). The same job could be selected for 
-multiple parties, but the parties themselves will play differently. That said, one way to make parties play differently is to use different jobs, 
-so 5 parties will see a lot of jobs appearing only once. 
+### Can I play with more or less than 5 parties?
+Less is easy: just play the parties in the order Coalition website gives them, and stop when you don't want to play anymore.
+
+Coalition is able to generate more than 5 parties, but I limited the website to only 5. You are welcome to use the Python code and
+generate a group of 500 parties if you wish.
+
+### I didn't get my favorite job in any of the 5 parties! What gives?
+Coalition is not the same as gauntlet runs, where every job shows up at least once. The RNG gods might cause some jobs to not appear in any party, while
+the same job could be selected for multiple parties, but the parties themselves will play differently. That said, one way to make parties play differently
+is to use different jobs, so 5 parties from Coalition tend to see a variety of jobs. 
 
 
 
