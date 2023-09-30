@@ -1,7 +1,8 @@
 # Coalition
 
 ## Introduction 
-Coalition is a project for generating multiple parties for challenge runs of [Final Fantasy 5 (FF5)](https://en.wikipedia.org/wiki/Final_Fantasy_V). All parties are intended to be Four Job Fiesta type of runs. 
+Coalition is a project for generating multiple parties for challenge runs of [Final Fantasy 5 (FF5)](https://en.wikipedia.org/wiki/Final_Fantasy_V). All parties 
+are intended to be Four Job Fiesta type of runs. Two types of runs are included here: Gauntlet and Coalition.
 
 [Four Job Fiesta](https://www.rpgsite.net/feature/11964-final-fantasy-v-four-job-fiesta-guide-how-to-tackle-this-unique-challenge) is a “challenge mode” for FF5. 
 Instead of playing the game as normal, participants are assigned 4 jobs randomly (with some rules) that their characters 1) are allowed to use, and 2) must use. 
@@ -20,9 +21,12 @@ the player to implement this strategy. The same can be said for the Chemist job 
 The goal of Coalition is to produce a set of parties that are “different” from each other so that players can complete multiple Four Job 
 Fiesta runs while experiencing different challenges from each. 
 
+Gauntlet runs are a common way to produce unique parties, and these can also be generated here. Gauntlet runs use each job once in a collection of 6
+parties. Obviously, the numbers don't perfectly work, so the 6th party will have a few duplicates.
+
 ## How to Use Coalition
 A proof of concept is [available online](https://sites.google.com/view/ff5-coalition/home), and feedback is appreciated. The Coalition website will allow 
-players to select a play style (for now, Regular, Meteor, or Meteor with Duplicates) and receive a collection of five unique parties. 
+players to select either Gauntlet or Coalition and a play style (for now, Regular, Meteor, or Meteor with Duplicates), and then receive a collection of five unique parties. 
 There’s no unlocking jobs like in the Four Job Fiesta event. 
 
 My goal here is to collect feedback on the quality of parties produced and understand whether others think they are really “different” 
@@ -35,6 +39,8 @@ as yet41.
 ## How to Use the Code
 The codebase for Coalition is written in Python. Clone the Git repository, and then run `pip install -r requirements.txt` in the project folder.
 The Jupyter Notebook file `assignment.ipynb` is how I generate parties. Of course, you're welcome to go through the `.py` files to see details.
+
+The Jupyter Notebook file `assignment_gauntlet.ipynb` generates runs following Gauntlet rules.
 
 ## How Does It Work?
 Once a play style is selected, the first party is decided completely randomly. Note that there is no special weighting to the jobs in the first 
