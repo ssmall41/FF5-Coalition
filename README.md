@@ -26,8 +26,8 @@ parties. Obviously, the numbers don't perfectly work, so the 6th party will have
 
 ## How to Use Coalition
 A proof of concept is [available online](https://sites.google.com/view/ff5-coalition/home), and feedback is appreciated. The Coalition website will allow 
-players to select either Gauntlet or Coalition and a play style (for now, Regular, Meteor, or Meteor with Duplicates), and then receive a collection of five unique parties. 
-There’s no unlocking jobs like in the Four Job Fiesta event. 
+players to select either Gauntlet or Coalition and a play style (Regular, Typhoon, Volcano, and Meteor, and with or without Duplicates), 
+and then receive a collection of five unique parties. There’s no unlocking jobs like in the Four Job Fiesta event. 
 
 My goal here is to collect feedback on the quality of parties produced and understand whether others think they are really “different” 
 from each other. To be clear: I have no intention of making the website nicer by unlocking jobs or storing assignment histories. 
@@ -74,7 +74,7 @@ Right now, the code takes into account the following:
 * the weapon types that the party can use after each crystal, and
 * whether an available jobs can use a shield at each crystal.
 
-For Meteor runs, it’s possible that no jobs are available after a crystal and the party must consist of only Freelancers. Coalition takes this into account. 
+For Volcano and Meteor runs, it’s possible that no jobs are available after a crystal and the party must consist of only Freelancers. Coalition takes this into account. 
 
 ## FAQs (or rather, questions I think will be asked)
 
