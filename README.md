@@ -116,7 +116,13 @@ Coalition is not the same as gauntlet runs, where every job shows up at least on
 the same job could be selected for multiple parties, but the parties themselves will play differently. That said, one way to make parties play differently
 is to use different jobs, so 5 parties from Coalition tend to see a variety of jobs. 
 
-
+## To Do
+Some open ideas for the future
+* Try NN based embeddings. An encoder-decoder setup might simplify the embeddings and make comparisons between parties easier. 
+However, it's not really clear if this would bring anything useful.
+* Do a proper analysis. Show means and stats for different parties compared to random parties. I've done some ad-hoc comparisons, and the approach
+by Coalition seems good, but it'd be nice to do a proper deep-dive.
+* Give a proper write-up for how it all works.
 
 
 
