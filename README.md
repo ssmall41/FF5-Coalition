@@ -118,10 +118,10 @@ is to use different jobs, so 5 parties from Coalition tend to see a variety of j
 
 ## To Do
 Some open ideas for the future
-* Try NN based embeddings. An encoder-decoder setup might simplify the embeddings and make comparisons between parties easier. 
+* Try neural network based embeddings. An encoder-decoder setup might simplify the embeddings and make comparisons between parties easier. 
 However, it's not really clear if this would bring anything useful.
 * Do a proper analysis. Show means and stats for different parties compared to random parties. I've done some ad-hoc comparisons, and the approach
-by Coalition seems good, but it'd be nice to do a proper deep-dive.
+by Coalition seems good, but it'd be nice to do a proper deep-dive. There might be something to learn from this.
 * Give a proper write-up for how it all works.
 
 
