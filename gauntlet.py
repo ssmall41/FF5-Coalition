@@ -5,7 +5,9 @@ from numpy.random import randint
 def generate_gauntlet_runs(run_style: str, df_jobs: pd.DataFrame) -> list:
     """ Generate a gauntlet run. This generates a coalition of parties in such a way as to select jobs uniquely. Of
     course, the last party will not have enough "new" jobs, so some old one will be selected. df_jobs should come from
-    a call to data.load_data. The number of parties in the coalition is determined by the run_style, probably 6.
+    a call to data.load_data. The number of parties in the coalition is determined by the run_style, 5 or 6.
+
+    Note that Mime and Freelancer are excluded.
 
     :param run_style: the style of the run, currently only "Regular" and "Meteor"
     :param df_jobs: the DataFrame of jobs. Only the index is used.
@@ -13,12 +15,12 @@ def generate_gauntlet_runs(run_style: str, df_jobs: pd.DataFrame) -> list:
     """
 
     num_jobs_in_party = 4  # 4 characters => 4 jobs
+    crystal_order = ["Wind", "Water", "Fire", "Earth"]
 
     if run_style == "Regular":
 
-        num_parties = 6
+        num_parties = 6  # 6 gets every job once, some twice
         selected_parties = []
-        crystal_order = ["Wind", "Water", "Fire", "Earth"]
         jobs_by_crystal = [list(
             df_jobs[df_jobs["Crystal"] == crystal_order[i]].index) for i in range(4)]
 
@@ -41,9 +43,9 @@ def generate_gauntlet_runs(run_style: str, df_jobs: pd.DataFrame) -> list:
 
     elif run_style == "Meteor":
 
-        num_parties = 6
+        num_parties = 5  # 5 gets every job, excluding Mime and Freelancer
         selected_parties = []
-        available_jobs = list(df_jobs.index)
+        available_jobs = list(df_jobs[df_jobs["Crystal"] != "Misc"].index)
 
         for party_idx in range(num_parties):
             party = []

@@ -21,8 +21,9 @@ the player to implement this strategy. The same can be said for the Chemist job 
 The goal of Coalition is to produce a set of parties that are “different” from each other so that players can complete multiple Four Job 
 Fiesta runs while experiencing different challenges from each. 
 
-Gauntlet runs are a common way to produce unique parties, and these can also be generated here. Gauntlet runs use each job once in a collection of 6
-parties. Obviously, the numbers don't perfectly work, so the 6th party will have a few duplicates.
+Gauntlet runs are a common way to produce unique parties, and these can also be generated here. Gauntlet runs use each job once in a collection 
+of 5 (Meteor) or 6 (Regular) parties. The Mime and Freelancer jobs are excluded. Obviously, if the numbers don't perfectly work, so the 6th party 
+will have a few duplicates.
 
 ## How to Use Coalition
 A proof of concept is [available online](https://sites.google.com/view/ff5-coalition/home), and feedback is appreciated. The Coalition website will allow 
