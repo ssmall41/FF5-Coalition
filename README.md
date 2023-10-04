@@ -22,8 +22,8 @@ The goal of Coalition is to produce a set of parties that are “different” fr
 Fiesta runs while experiencing different challenges from each. 
 
 Gauntlet runs are a common way to produce unique parties, and these can also be generated here. Gauntlet runs use each job once in a collection 
-of 5 (Meteor) or 6 (Regular) parties. The Mime and Freelancer jobs are excluded. Obviously, if the numbers don't perfectly work, so the 6th party 
-will have a few duplicates.
+of 5 parties with the Mime and Freelancer jobs excluded. For Regular runs to work out, one of the jobs from the Wind Crystal is moved to the
+Earth Crystal.
 
 ## How to Use Coalition
 A proof of concept is [available online](https://sites.google.com/view/ff5-coalition/home), and feedback is appreciated. The Coalition website will allow 
